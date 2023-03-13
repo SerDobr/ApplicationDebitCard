@@ -1,3 +1,4 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,11 +9,14 @@ public class NoNumberTest {
     private WebDriver driver;
 
     @BeforeAll
-    static void setUpAll() {
-// убедитесь, что файл chromedriver.exe расположен именно в каталоге C:\tmp
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Sergey\\IdeaProjects\\webTestInterface\\driver\\chromedriver.exe");
+    static void setupAll() {
+        WebDriverManager.chromedriver().setup();
     }
 
+    @BeforeEach
+    void setup() {
+        driver = new ChromeDriver();
+    }
     @BeforeEach
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
