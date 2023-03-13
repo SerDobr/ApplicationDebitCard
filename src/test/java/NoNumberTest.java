@@ -13,10 +13,11 @@ public class NoNumberTest {
         WebDriverManager.chromedriver().setup();
     }
 
-    @BeforeEach
-    void setup() {
-        driver = new ChromeDriver();
+    @AfterEach
+    void tearDown() {
+        driver.quit();
     }
+
     @BeforeEach
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
@@ -26,11 +27,6 @@ public class NoNumberTest {
         driver = new ChromeDriver(options);
     }
 
-    @AfterEach
-    void tearDown() {
-        driver.quit();
-        driver = null;
-    }
 
     @Test
     void shouldApplicationDebitCardNoNumber() {

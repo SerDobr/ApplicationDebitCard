@@ -15,10 +15,6 @@ class OrderingСardTest {
         WebDriverManager.chromedriver().setup();
     }
 
-    @BeforeEach
-    void setup() {
-        driver = new ChromeDriver();
-    }
 
     @BeforeEach
     public void setUp() {
@@ -32,7 +28,6 @@ class OrderingСardTest {
     @AfterEach
     void tearDown() {
         driver.quit();
-        driver = null;
     }
 
     @Test
