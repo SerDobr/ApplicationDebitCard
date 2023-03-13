@@ -2,6 +2,7 @@ import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class NoNumberTest {
     private WebDriver driver;
@@ -13,8 +14,12 @@ public class NoNumberTest {
     }
 
     @BeforeEach
-    void setUp() {
-        driver = new ChromeDriver();
+    public void setUp() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--headless");
+        driver = new ChromeDriver(options);
     }
 
     @AfterEach
@@ -32,7 +37,7 @@ public class NoNumberTest {
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
         driver.findElement(By.cssSelector("div>button")).click();
         String expected = "Поле обязательно для заполнения";
-        String actual = driver.findElements(By.className("input__sub")).get(1).getText();
+        String actual = driver.findElement(By.cssSelector("[data-test-id=phone].input_invalid .input__sub")).getText();
         Assertions.assertEquals(expected, actual);
 
     }

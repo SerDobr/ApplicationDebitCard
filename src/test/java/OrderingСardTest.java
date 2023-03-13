@@ -1,8 +1,8 @@
-import org.jsoup.nodes.Node;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.io.ObjectInputStream;
 
@@ -11,13 +11,17 @@ class OrderingСardTest {
 
     @BeforeAll
     static void setUpAll() {
-// убедитесь, что файл chromedriver.exe расположен именно в каталоге C:\tmp
+
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Sergey\\IdeaProjects\\webTestInterface\\driver\\chromedriver.exe");
     }
 
     @BeforeEach
-    void setUp() {
-        driver = new ChromeDriver();
+    public void setUp() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--headless");
+        driver = new ChromeDriver(options);
     }
 
     @AfterEach
